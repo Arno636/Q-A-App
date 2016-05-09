@@ -12,16 +12,21 @@ gulp.task('start', function () {
   })
 });
 
-gulp.task('sass', function () {
-  return gulp.src('assets/sass/*.scss')
-    .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('assets/css/'));
+gulp.task('styles', function() {
+    gulp.src('assets/sass/*.scss')
+        .pipe(sass().on('error', sass.logError))
+        .pipe(gulp.dest('assets/css/'))
+});
+
+//Watch task
+gulp.task('default',function() {
+    gulp.watch('./assets/sass/*.scss',['styles', 'minify-css']);
 });
  
 gulp.task('minify-css', function() {
   return gulp.src('assets/css/*.css')
     .pipe(cleanCSS({compatibility: 'ie8'}))
-    .pipe(gulp.dest('build/css/'));
+    .pipe(gulp.dest('assets/build/css/'));
 });
  
 gulp.task('concat', function () {
