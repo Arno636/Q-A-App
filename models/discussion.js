@@ -6,4 +6,5 @@ var discussionSchema = new Schema({
  userId: Number
 });
 var Discussion = mongoose.model('Discussion', discussionSchema);
+
 module.exports = Discussion;
