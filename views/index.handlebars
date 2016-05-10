@@ -1,2 +1,9 @@
 <h2 class="page-header">Discussions</h2>
 <p>Discussions in the area</p>  
+<div>
+{{#each data}}
+	<a href="discussions/{{this.id}}"><h2>{{this.title}}</h2></a>
+	<p>{{this.message}}</p>
+	<hr>
+{{/each}}
+</div>

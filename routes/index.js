@@ -1,9 +1,16 @@
 var express = require('express');
 var router = express.Router();
+var mongoose = require('mongoose');
 
-// Get Homepage
+var Discussion = require('../models/discussion');
+
 router.get('/', ensureAuthenticated, function(req, res){
-	res.render('index');
+
+	Discussion.find( function(err, docs) {
+       	res.render('index', {data: docs});
+    });
+
+	
 });
 
 function ensureAuthenticated(req, res, next){
