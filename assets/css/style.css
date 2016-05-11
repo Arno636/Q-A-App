@@ -8,6 +8,19 @@ body {
   padding-top: 20px;
   padding-bottom: 20px; }
 
+.btn-default {
+  margin-bottom: 20px; }
+
+.page-header {
+  border: none;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 25px;
+  border-left: 3px solid #E91E63;
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px; }
+
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,
@@ -18,19 +31,28 @@ body {
 /* Custom page header */
 .header {
   padding-bottom: 20px;
-  border-bottom: 1px solid #e5e5e5; }
+  border-bottom: 1px solid #e5e5e5;
+  margin-bottom: 30px;
+  letter-spacing: 1px; }
 
 /* Make the masthead heading the same height as the navigation */
 .header h3 {
   margin-top: 0;
   margin-bottom: 0;
-  line-height: 40px; }
+  line-height: 40px;
+  color: #E91E63; }
+
+.header ul li a {
+  color: #37474F;
+  font-size: 16px; }
 
 /* Custom page footer */
 .footer {
+  margin-top: 0;
   padding-top: 19px;
-  color: #777;
-  border-top: 1px solid #e5e5e5; }
+  color: #37474F;
+  border-top: 1px solid #e5e5e5;
+  letter-spacing: 1px; }
 
 /* Customize container */
 @media (min-width: 768px) {
@@ -71,9 +93,6 @@ body {
   .jumbotron {
     border-bottom: 0; } }
 
-.page-header {
-  margin-top: 0; }
-
 footer {
   margin-top: 40px; }
 
@@ -87,7 +106,8 @@ input {
   padding: 15px 30px;
   font-size: 0.9em;
   border: none;
-  border: 1px solid gray; }
+  border: 1px solid gray;
+  outline: none !important; }
 
 .textarea {
   height: 240px;
@@ -116,3 +136,142 @@ input {
   -moz-box-shadow: 0px 0px 25px -9px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 0px 25px -9px rgba(0, 0, 0, 0.75);
   -webkit-transition: background-color 0.2s linear, box-shadow 0.4s 0.2s linear; }
+
+/* DISCUSSION PAGE */
+.back a {
+  display: inline-block;
+  width: 100%;
+  background-color: #E91E63;
+  font-size: 16px;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 1px;
+  padding: 10px;
+  border-radius: 1px;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out; }
+
+.back a:hover {
+  background-color: rgba(233, 30, 99, 0.8); }
+
+h1 {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding-bottom: 5px;
+  color: #37474F;
+  margin: 0; }
+
+.wrap-title-discussion {
+  width: 100%;
+  height: auto;
+  margin-top: 25px; }
+
+.message-discussion {
+  font-size: 18px;
+  letter-spacing: 1px;
+  color: #37474F; }
+
+.line-gray {
+  width: 100%;
+  height: 1px;
+  background-color: #e5e5e5;
+  margin-top: 25px;
+  margin-bottom: 25px; }
+
+.dis {
+  margin: 0;
+  padding: 0; }
+
+h2 {
+  font-size: 20px;
+  letter-spacing: 1px;
+  margin: 0;
+  padding-left: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-left: 3px solid #E91E63;
+  color: #37474F; }
+
+.btn-ask-question {
+  width: 220px;
+  height: auto;
+  color: #fff;
+  font-size: 16px;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 1px;
+  padding: 10px;
+  background-color: #E91E63;
+  border-radius: 1px;
+  margin-bottom: 25px;
+  cursor: pointer;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out; }
+
+.btn-ask-question:hover {
+  background-color: rgba(233, 30, 99, 0.8); }
+
+.question {
+  display: none; }
+
+.textfield-d {
+  width: 100%;
+  padding: 15px 30px;
+  font-size: 16px;
+  border: none;
+  border: 1px solid #37474F;
+  color: #37474F;
+  outline: none !important; }
+
+.textarea-d {
+  height: 150px;
+  max-width: 100%;
+  resize: none;
+  padding: 30px; }
+
+/* INDEX PAGE */
+.h1-dis {
+  margin-bottom: 25px;
+  border-left: 3px solid #E91E63;
+  padding-left: 20px;
+  padding-top: 5px; }
+
+.title-discussion {
+  font-size: 25px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: #37474F;
+  padding-top: 15px; }
+
+.mes-dis {
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  color: #37474F;
+  padding-bottom: 15px; }
+
+.wrap-each-discussion {
+  width: 100%;
+  height: 100%;
+  border-bottom: 1px solid #e5e5e5; }
+
+.wrap-each-discussion:last-child {
+  border: none; }
+
+.wrap-each-discussion:hover {
+  background-color: #e5e5e5; }
+
+.wrap-each-discussion,
+.title-discussion,
+.mes-dis {
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out; }
+
+.wrap-each-discussion:hover .title-discussion,
+.wrap-each-discussion:hover .mes-dis {
+  padding-left: 10px; }
+
+.wrap-each-discussion a {
+  text-decoration: none; }

@@ -11,16 +11,12 @@ var LocalStrategy = require('passport-local').Strategy;
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
 
-
 var app = express();
 
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
-mongoose.connect('mongodb://localhost/qanda');
-
-
-
+mongoose.connect('mongodb://localhost/loginapp');
 
 app.use(express.static(__dirname + '/assets'));
 
@@ -31,7 +27,6 @@ app.set('view engine', 'handlebars');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-
 
 // Express Session
 app.use(session({
@@ -96,13 +91,6 @@ app.use('/discussions', discussions);
 // 	io.to(id).emit("connect", "hello");
 // 	console.log("connect");
 // });
-
-
-
-
-
-
-
 
 
 http.listen(3000, function(){

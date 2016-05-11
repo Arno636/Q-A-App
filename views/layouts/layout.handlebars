@@ -5,6 +5,7 @@
     <title>Q&amp;A</title>
     <link rel="stylesheet" href="/css/bootstrap.css" />
     <link rel="stylesheet" href="/css/style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 </head>
 <body>
     
@@ -15,10 +16,11 @@
                 <ul class="nav nav-pills pull-right">
                     {{#if user}}
                         <li role="presentation"><a href="/">Discussions</a></li>
+                        <li role="presentation"><a href="/discussions/create">Create</a></li>
                         <li role="presentation"><a href="/users/logout">Logout</a></li>
                     {{else}}
                         <li role="presentation"><a href="/users/login">Login</a></li>
-                        <li role="presentation"><a href="/users/register">Register</a></li>
+                        <li role="presentation"><a href="/users/register">Sign up</a></li>
                     {{/if}}
                 </ul>
             </nav>

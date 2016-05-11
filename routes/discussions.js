@@ -4,23 +4,54 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 
 var Discussion = require('../models/discussion');
+var Question = require('../models/question');
 
 router.get('/create', ensureAuthenticated, function(req, res){
 	res.render('create');
 });
 
 router.get('/:id', ensureAuthenticated, function(req, res){
-	  Discussion.count({ '_id': req.params.id }, function(err, count) {
-           if(count == 1){
-           		Discussion.find({ '_id': req.params.id }, function(err, docs) {
-           			res.render('discussion', {"title": docs[0].title, "message": docs[0].message, "userId": docs[0].userId});
-           		});
-           }else{
-           		res.render("404");
-           }
-      });
+    Discussion.count({ '_id': req.params.id }, function(err, count){
+        if(count == 1)
+        {
+            Discussion.find({ '_id': req.params.id }, function(err, docs){
+                
+                Question.find({ 'discussionId': docs[0].id }, function(err, docs2){
+                    res.render('discussion', {"title": docs[0].title, "message": docs[0].message, "userId": docs[0].userId, "question": docs2});
+                });
+                
+           	});
+        }
+        else
+        {
+            res.render("404");
+        }
+    });
 });
 
+/*
+router.get('/:id', ensureAuthenticated, function(req, res){
+    Discussion.count({ '_id': req.params.id }, function(err, count){
+        if(count == 1)
+        {
+            Discussion.find({ '_id': req.params.id }, function(err, docs){
+                
+                Question.find({ 'discussionId': docs[0].id }, function(err, docs2){
+                    
+                    Answer.find({ 'questionId': docs2[0].id }, function(err, docs3){
+                        res.render('discussion', {"title": docs[0].title, "message": docs[0].message, "userId": docs[0].userId, "question": docs2, "answer": docs3});
+                    });
+            
+                });
+                
+           	});
+        }
+        else
+        {
+            res.render("404");
+        }
+    });
+});*/
 
 var jsonParser = bodyParser.json();
 
@@ -45,6 +76,24 @@ router.post('/create', urlencodedParser, function (req, res) {
 	});
 });
 
+// POST for question
+router.post('/:id', urlencodedParser, function (req, res) {
+    
+    var question = new Question({question: req.body.question , discussionId: req.params.id});
+
+	//save model to MongoDB
+	question.save(function (err,room) {
+	  if (err) {
+			return err;
+	  }
+	  else {
+	  	console.log("A new question is opened with id: " + room.id);
+	  	res.redirect(req.params.id);
+	  }
+	});
+    
+});
+
 function ensureAuthenticated(req, res, next){
     if(req.isAuthenticated())
     {
@@ -56,7 +105,5 @@ function ensureAuthenticated(req, res, next){
 		res.redirect('/users/login');
 	}
 }
-
-
 
 module.exports = router;

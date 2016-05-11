@@ -1,9 +1,12 @@
-<h2 class="page-header">Discussions</h2>
-<p>Discussions in the area</p>  
-<div>
+<h1 class="h1-dis">Discussions</h1>
+  
+<div class="line-gray dis"></div>
+
 {{#each data}}
-	<a href="discussions/{{this.id}}"><h2>{{this.title}}</h2></a>
-	<p>{{this.message}}</p>
-	<hr>
+    <div class="wrap-each-discussion">
+        <a href="discussions/{{this.id}}">
+            <div class="title-discussion">{{this.title}}</div>
+            <div class="mes-dis">{{this.message}}</div>
+        </a>
+    </div>
 {{/each}}
-</div>
