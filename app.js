@@ -72,10 +72,12 @@ app.use(function (req, res, next) {
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var discussions = require('./routes/discussions');
+var question = require('./routes/question');
 
 app.use('/', routes);
 app.use('/users', users);
 app.use('/discussions', discussions);
+app.use('/question', question);
 
 
 // 	var id = 0;

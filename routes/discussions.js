@@ -19,17 +19,19 @@ router.get('/:id', ensureAuthenticated, function(req, res){
                 
                 Question.find({ 'discussionId': docs[0].id }, function(err, docs2){
                     
-                    var data = [];
-                    
+               
+                    var answers = [];
                     for(var i = 0; i < docs2.length; i++)
                     {
-                        Answer.find({ 'questionId': docs2[i].id }, function(err, docs3){
-                            data.push(docs3.answer);
+                        Answer.find( function(err, docs3){
+                            var data = [];
+                            if(docs3[i].questionId == docs2[0].id){
+                                data.push(docs3[i].answer);
+                                answers.push(data);
+                            }
                         });
                     }
-                    
-                    res.render('discussion', {"title": docs[0].title, "message": docs[0].message, "userId": docs[0].userId, "question": docs2, "answer": data});
-                    console.log(data);
+                    res.render('discussion', {"id": docs[0].id, "title": docs[0].title, "message": docs[0].message, "userId": docs[0].userId, "question": docs2});
                 });
                 
            	});
@@ -40,6 +42,17 @@ router.get('/:id', ensureAuthenticated, function(req, res){
         }
     });
 });
+
+router.get('/:discussion/:id', ensureAuthenticated, function(req, res){
+
+    Question.find({ 'discussionId':req.body.discussion}, function(err, docs2){
+        Answer.find( {'questionId': docs2[0]}, function(err, docs3){
+            res.render("question", {"answers": docs3})
+        });
+    });
+    
+});
+
 
 var jsonParser = bodyParser.json();
 
@@ -66,37 +79,49 @@ router.post('/create', urlencodedParser, function (req, res) {
 
 // POST for question and answer
 router.post('/:id', urlencodedParser, function (req, res) {
-    
-    if(req.body.answer != null)
-    {
-        var answer = new Answer({answer: req.body.answer , questionId: req.body.questionId , discussionId: req.params.id});
+    if(req.body.del != null){
         
-        //save model to MongoDB
-        answer.save(function (err,room) {
-          if (err) {
-                return err;
-          }
-          else {
-            console.log("A new answer is opened with id: " + room.id);
-            res.redirect(req.params.id);
-          }
+        Question.remove({ _id: req.body.del }, function(err) {
+            if (!err) {
+                res.redirect("/discussions/"+req.params.id);
+            }
         });
-    }
-    else
-    {
-        var question = new Question({question: req.body.question , discussionId: req.params.id});
 
-        //save model to MongoDB
-        question.save(function (err,room) {
-          if (err) {
+    }else{
+
+        if(req.body.answer != null)
+        {
+            var answer = new Answer({answer: req.body.answer , questionId: req.body.questionId , discussionId: req.params.id});
+            
+            answer.save(function (err,room) {
+              if (err) {
                 return err;
-          }
-          else {
-            console.log("A new question is opened with id: " + room.id);
-            res.redirect(req.params.id);
-          }
-        });
-    }
+              }
+              else {
+                console.log("A new answer is opened with id: " + room.id);
+                res.redirect(req.params.id);
+              }
+            });
+        }
+        else
+        {
+            var question = new Question({question: req.body.question , discussionId: req.params.id});
+
+            question.save(function (err,room) {
+              if (err) {
+                    return err;
+              }
+              else {
+                console.log("A new question is opened with id: " + room.id);
+                res.redirect(req.params.id);
+              }
+            });
+        }
+
+
+    } 
+
+
     
 });
 
