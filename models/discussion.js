@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 var discussionSchema = new Schema({
     title: String,
     message: String,
-    userId: Number
+    userId: String
 });
 
 var Discussion = mongoose.model('Discussion', discussionSchema);

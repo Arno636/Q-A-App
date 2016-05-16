@@ -8,6 +8,6 @@ var answerSchema = new Schema({
     discussionId: String
 });
 
-var Answer = mongoose.model('Answer', questionSchema);
+var Answer = mongoose.model('Answer', answerSchema);
 
 module.exports = Answer;

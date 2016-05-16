@@ -8,14 +8,30 @@
 <div class="line-gray"></div>
 
 {{#each question}}
-    <h2>{{this.question}}</h2>
-    
-    <h2>{{this.answer}}</h2>
-    
-    <div class="line-gray"></div>
+    <div class="grid-question">
+        <div class="width-q">
+            <h2>{{this.question}}</h2>
+            <form class="form-del">
+                <input type="submit" value="Del" class="del">
+                <!--<div class="del"><img src="/img/cancel.svg" alt="Delete"></div>-->
+            </form>
+        </div>
+        <div class="btn-give-answer">Give an answer</div>
+        <div class="answer">
+            <form class="form-a" action="" method="post">
+                <textarea name="answer" placeholder="Answer" class="textfield-a textarea-a"></textarea>
+                <input type="text" name="questionId" hidden="hidden" value="{{this.id}}"> 
+                <input type="submit" value="Explain" class="button-a">
+            </form>
+        </div>
+    </div>
+    {{#each answer}}
+        <h2>{{this}}</h2>
+    {{/each}}
+    <div class="line-gray"></div> 
 {{/each}}
 
-<div class="btn-ask-question">Ask a new question</div>
+<div class="btn-ask-question">Ask a question</div>
 
 <div class="question">
     <form action="" method="post">
@@ -24,12 +40,18 @@
     </form>
 </div>
 
-
 <script>
 
+    // Button ask a question
     $(".btn-ask-question").click(function(){
         $(".btn-ask-question").hide();
         $(".question").show();
+    });
+
+    // Button give an answer
+    $(".btn-give-answer").click(function(){
+        $(this).parent().find(".btn-give-answer").hide();
+        $(this).parent().find(".answer").show();
     });
 
 </script>
