@@ -27,7 +27,6 @@
         <form action="" method="post" class="form-del">
             <input type="text" name="del" value="{{this.id}}" hidden="hidden">
             <input type="submit" value="Del" class="del">
-            <!--<div class="del"><img src="/img/cancel.svg" alt="Delete"></div>-->
         </form>
     </div>
     </a>
@@ -57,14 +56,5 @@
         $(this).parent().find(".btn-give-answer").hide();
         $(this).parent().find(".answer").show();
     });
-
-    <script src="http://cdn.socket.io/socket.io-1.4.5.js"></script>
-    <script>
-       var socket = io();
-
-        socket.on("connect", function(data){
-          $(".users").append("<p>TEST</p>");
-        });
-     </script>
-
+    
 </script>
